@@ -1,19 +1,10 @@
-# Hello
+Install asdf using brew https://mac.install.guide/ruby/5.html
 
-To start your Phoenix server:
+Installing Elixir and Erlang With ASDF: https://www.pluralsight.com/guides/installing-elixir-erlang-with-asdf
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Install git using brew: https://git-scm.com/download/mac
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Install docker using https://docs.docker.com/desktop/install/mac-install/
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Run the project using:
+`make start`

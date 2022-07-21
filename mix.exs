@@ -5,12 +5,16 @@ defmodule Hello.MixProject do
     [
       app: :hello,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test
+      ]
     ]
   end
 
@@ -48,7 +52,17 @@ defmodule Hello.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:redix, "~> 1.2"},
+      {:poison, "~> 5.0"},
+      {:gen_rmq, "~> 4.0"},
+      {:ecto_erd, "~> 0.5.0"},
+      {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.11.1", only: [:dev, :test]},
+      {:ex_doc, "~> 0.28.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: [:dev, :test]},
+      {:git_hooks, "~> 0.7.3", only: [:test, :dev], runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -64,7 +78,9 @@ defmodule Hello.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      lint: ["compile --warnings-as-errors", "format --check-formatted", "credo"],
+      security: ["sobelow --config", "deps.audit"]
     ]
   end
 end

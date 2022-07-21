@@ -1,0 +1,37 @@
+version: '3'
+name: Hello
+services:
+  app:
+    image: hello:v1.0
+    container_name: hello
+    build: 
+      context: .
+    environment:
+      MIX_ENV: dev
+      DATABASE_URL: ecto://postgres:postgres@host.docker.internal/hello_dev
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: hello_dev
+      PGPORT: 5432
+      PGHOST: host.docker.internal
+      REDIS_URL: redis://host.docker.internal:6379
+      RABBITMQ_URL: amqp://guest:guest@host.docker.internal:5672
+      RMQ_EXCHANGE: my_exchange
+      RMQ_QUEUE: my_queue
+      PORT: 4001
+      SECRET_KEY_BASE: 79rq2Ae/L7Cjw4F3Q/jDsKZcoWtq4kbz37XYrt9VdA+V9OeAeA3K1NYnOt9h9dGo
+      PHX_HOST: localhost:4001
+      # MIX_ENV: ${MIX_ENV}
+      # DATABASE_URL: ${DATABASE_URL}
+      # PGUSER: ${PGUSER}
+      # PGPASSWORD: ${PGPASSWORD}
+      # PGDATABASE: ${PGDATABASE}
+      # PGPORT: ${PGPORT}
+      # PGHOST: ${PGHOST}
+      # REDIS_URL: ${REDIS_URL}
+      # RABBITMQ_URL: ${RABBITMQ_URL}
+      # RMQ_EXCHANGE: ${RMQ_EXCHANGE}
+      # RMQ_QUEUE: ${RMQ_QUEUE}
+      # PORT: ${PORT}
+    ports:
+      - 4001:4001

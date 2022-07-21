@@ -7,7 +7,11 @@ defmodule HelloWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, {HelloWeb.LayoutView, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+
+    plug :put_secure_browser_headers, %{
+      "content-security-policy" =>
+        "default-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:"
+    }
   end
 
   pipeline :api do
@@ -18,6 +22,8 @@ defmodule HelloWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/hello", PageController, :hello
+    get "/push", PageController, :push
   end
 
   # Other scopes may use custom stacks.

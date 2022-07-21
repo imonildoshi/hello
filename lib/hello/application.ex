@@ -14,6 +14,19 @@ defmodule Hello.Application do
       HelloWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Hello.PubSub},
+      # Start Redis connection
+      {Redix, {System.fetch_env!("REDIS_URL"), [name: :redix]}},
+
+      # Start the RMQ Consumer
+      %{
+        id: Consumer,
+        start: {Hello.Consumer, :start_link, []}
+      },
+      %{
+        id: Publisher,
+        start: {Hello.Publisher, :start_link, []}
+      },
+
       # Start the Endpoint (http/https)
       HelloWeb.Endpoint
       # Start a worker by calling: Hello.Worker.start_link(arg)

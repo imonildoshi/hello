@@ -1,3 +1,5 @@
+alias Ecto.Adapters.SQL.Sandbox
+
 defmodule Hello.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
@@ -36,8 +38,8 @@ defmodule Hello.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Hello.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(Hello.Repo, shared: not tags[:async])
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

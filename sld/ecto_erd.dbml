@@ -1,0 +1,17 @@
+
+
+Table schema_migrations {
+  version integer
+  inserted_at timestamp
+}
+
+Table users {
+  id integer [pk]
+  bio varchar
+  email varchar
+  name varchar
+  number_of_pets integer
+  inserted_at timestamp
+  updated_at timestamp
+}
+
